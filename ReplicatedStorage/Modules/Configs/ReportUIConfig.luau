@@ -1,0 +1,47 @@
+return {
+	opener = "Report a bug",
+	eyebrow = "SUPPORT",
+	title = "Something broken?",
+	subtitle = "Tell us what happened. We'll take a look!",
+	prompt = "What happened?",
+	placeholder = "What were you doing? What went wrong?",
+	footer = "Only the development team sees your report.",
+	count = "%d / %d",
+	minimum = "Add at least %d characters.",
+	help = "A little detail helps us find the problem.",
+	sendingHelp = "Sending your report. You can close this window.",
+	retryHelp = "Please wait a moment before trying again.",
+	
+	buttons = {
+		send = "Send report",
+		retry = "Try again",
+		sending = "Sending...",
+		retryIn = "Try again in %ds",
+		compactSend = "Send",
+		compactSending = "...",
+		compactRetry = "%ds",
+		done = "Back to the game",
+	},
+	
+	status = {
+		successTitle = "Thanks!",
+		cooldownTitle = "One note at a time.",
+		subtitle = "Your last report is with the team.",
+		success = "Your report is with the team.\nThanks for helping improve the game!",
+		cooldown = "Please wait a little before sending another report.",
+		countdown = "Another report in %s",
+		ready = "You can send another report now.",
+	},
+	
+	errors = {
+		unavailable = "Reports aren't available right now. Your message is saved here.",
+		invalid = "Please enter valid text and try again.",
+		short = "Please add a little more detail before sending.",
+		long = "Your report is too long. Shorten it and try again.",
+		filter = "We couldn't process that text. Try rephrasing it.",
+		send = "Couldn't confirm delivery. Your message is still here.",
+		timeout = "Couldn't confirm delivery yet. Your message is still here.",
+		internal = "Something went wrong. Your message is still here.",
+		default = "Couldn't send your report. Your message is still here.",
+	} :: {[string]: string},
+}

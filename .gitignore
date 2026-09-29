@@ -1,0 +1,13 @@
+/*
+!/.gitignore
+!/ReplicatedFirst/
+!/ReplicatedStorage/
+!/ServerScriptService/
+!/ServerStorage/
+!/StarterCharacterScripts/
+!/StarterPlayerScripts/
+**/*.md
+!/README.md
+/ServerStorage/Trash/
+*.rbxl.lock
+*.rbxlx.lock
