@@ -1,4 +1,4 @@
-# Technical assessment
+# Tech assessment place
 
 A two-player Roblox collection prototype built on my existing roblox studio template
 
