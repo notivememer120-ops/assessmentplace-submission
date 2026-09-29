@@ -13,7 +13,6 @@ function TagBinder.bind(tag: string, callback: (any, Scythe.Scope) -> ...any, ro
 
 	local parent = root :: Instance
 	local bindingScope = Scythe.scope()
-	local collection = collectionServ:CreateCollection(`.{tag}`, parent)
 	local scopes: {[Instance]: Scythe.Scope} = {}
 	local stopped = false
 
@@ -36,8 +35,6 @@ function TagBinder.bind(tag: string, callback: (any, Scythe.Scope) -> ...any, ro
 
 		stopped = true
 
-		collection:Destroy()
-
 		Scythe.destroy(bindingScope)
 
 		for instance in scopes do
@@ -45,12 +42,8 @@ function TagBinder.bind(tag: string, callback: (any, Scythe.Scope) -> ...any, ro
 		end
 	end
 
-	Scythe.connect(bindingScope, parent.Destroying, stop)
-
-	collection.OnRemoved = remove
-
-	collection.OnAdded = function(instance)
-		if stopped or scopes[instance] then
+	local function add(instance: Instance)
+		if stopped or scopes[instance] or not instance:IsDescendantOf(parent) or not collectionServ:HasTag(instance, tag) then
 			return
 		end
 
@@ -68,15 +61,15 @@ function TagBinder.bind(tag: string, callback: (any, Scythe.Scope) -> ...any, ro
 		end
 	end
 
-	local count = 0
+	Scythe.connect(bindingScope, parent.Destroying, stop)
+	Scythe.connect(bindingScope, parent.DescendantAdded, add)
+	Scythe.connect(bindingScope, parent.DescendantRemoving, remove)
+	Scythe.connect(bindingScope, collectionServ:GetInstanceAddedSignal(tag), add)
+	Scythe.connect(bindingScope, collectionServ:GetInstanceRemovedSignal(tag), remove)
 
-	collection:ForEach(function()
-		count += 1
-	end)
-
-	--if count == 0 then
-
-	--end
+	for _, instance in collectionServ:GetTagged(tag) do
+		add(instance)
+	end
 
 	return stop
 end
